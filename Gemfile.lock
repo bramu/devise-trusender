@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    devise_plug_trusender (0.1.0)
+    devise_trusender (0.1.0)
       devise
       trusender (>= 0.0.1)
 
@@ -63,7 +63,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
-    rake (10.5.0)
+    rake (13.0.1)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -81,8 +81,8 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
-  devise_plug_trusender!
-  rake (~> 10.0)
+  devise_trusender!
+  rake (~> 13.0)
 
 BUNDLED WITH
    2.0.1
