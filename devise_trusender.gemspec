@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "devise_plug_trusender/version"
+require "devise_trusender/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "devise_plug_trusender"
-  spec.version       = DevisePlugTrusender::VERSION
+  spec.name          = "devise_trusender"
+  spec.version       = DeviseTrusender::VERSION
   spec.authors       = ["Ramu"]
   spec.email         = ["praveenyoungind@gmail.com"]
 
   spec.summary       = %q{Tursender devise bindings}
   spec.description   = %q{Sender devise emails through trusender}
-  spec.homepage      = "http://rubygems.org/gems/devise_plug_trusender"
+  spec.homepage      = "http://rubygems.org/gems/devise-trusender"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
