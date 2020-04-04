@@ -73,7 +73,6 @@ BODY:
 <p>Your password won't change until you access the link above and create a new one.</p>
 
 
-
 TemplateName: unlock_instructions
 Subject: "Unlock instructions"
 
