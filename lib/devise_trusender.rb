@@ -43,7 +43,7 @@ module Devise
         initialize_from_record(record)
         headers = headers_for(action, opts)
         puts "Successfully delivered email."
-        TruSender.send_email(DeviseTruSender::get_ts_token, headers[:template_name], headers[:to], opts)
+        TruSender::send_email(DeviseTruSender::get_ts_token, headers[:template_name], headers[:to], opts)
       end
 
     end
