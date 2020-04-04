@@ -34,6 +34,9 @@ end
 module Devise
   module Mailers
     module Helpers
+      include ActionView::Helpers
+      # include Devise::Mailers::Helpers
+
       protected
 
       attr_reader :scope_name, :resource
@@ -42,20 +45,28 @@ module Devise
       def devise_mail(record, action, opts = {}, &block)
         initialize_from_record(record)
         headers = headers_for(action, opts)
+        opts.merge!({email: record.email})
+        host, port = ActionMailer::Base.default_url_options.values_at :host, :port
+        http_method = Rails.application.config.force_ssl ? 'https' : 'http'
 
         case headers[:template_name].to_s
         when "confirmation_instructions"
-          opts.merge!({email: record.email })
+          confirmation_url = "#{http_method}://#{host}:#{port}/#{record.class.to_s.downcase}/confirmation?confirmation_token="+record.confirmation_token
+          opts.merge!({confirmation_url:  confirmation_url })
         when "reset_password_instructions"
-          opts.merge!({email: record.email })
+          edit_password_url = "#{http_method}://#{host}:#{port}/#{record.class.to_s.downcase}/password/edit?reset_password_token="+record.reset_password_token
+
+          opts.merge!({edit_password_url: edit_password_url })
         when "unlock_instructions"
-          opts.merge!({email: record.email })
+          unlock_url = "#{http_method}://#{host}:#{port}/#{record.class.to_s.downcase}/unlock?unlock_token="+record.unlock_token
+
+          opts.merge!({unlock_url: unlock_url })
         when "email_changed"
-          opts.merge!({email: record.email })
+          if resource.try(:unconfirmed_email?)
+            opts.merge!({unconfirmed_email: resource.unconfirmed_email})
+          end
         when "password_change"
-          opts.merge!({email: record.email })
-        else
-          opts.merge!({email: record.email })
+          # opts.merge!({})
         end
         puts "Successfully delivered email."
         TruSender::send_email(DeviseTruSender::get_ts_token, headers[:template_name], headers[:to], opts)
