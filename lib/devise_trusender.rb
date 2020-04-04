@@ -42,6 +42,21 @@ module Devise
       def devise_mail(record, action, opts = {}, &block)
         initialize_from_record(record)
         headers = headers_for(action, opts)
+
+        case headers[:template_name].to_s
+        when "confirmation_instructions"
+          opts.merge!({email: record.email })
+        when "reset_password_instructions"
+          opts.merge!({email: record.email })
+        when "unlock_instructions"
+          opts.merge!({email: record.email })
+        when "email_changed"
+          opts.merge!({email: record.email })
+        when "password_change"
+          opts.merge!({email: record.email })
+        else
+          opts.merge!({email: record.email })
+        end
         puts "Successfully delivered email."
         TruSender::send_email(DeviseTruSender::get_ts_token, headers[:template_name], headers[:to], opts)
       end
